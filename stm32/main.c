@@ -16,27 +16,35 @@ static volatile float step_y_i10 = 0;
 static volatile uint8_t x_only = 0;
 static volatile uint8_t y_only = 0;
 
+volatile uint8_t c = 'A';
+
+static volatile uint32_t tim4_tick = 0;
+
 int main(){
 	SysTick_Config(SystemCoreClock / 1000);	
 	initClock();
 	initGPIOs();
 	
 	initUSART1();
-//	printMsg("Chao %.2lf ban\n", step_x);
+	//transmitWhatReceived();
 	
-	initTimer2();
+	//initTimer2();
 	
-	initTimer3();
+	//initTimer3();
 	
-	liftPen(1);
+	//timer for delayUs function
+	initTimer4();
 	
-	writePin(PORTC, 13, 0);	
+	//liftPen(1);
+	
+	printMsg("Chao %.2f ban nhe hihi\n", step_x);
+	
+	writePin(PORTC, 13, 0);
 	startButton();	
 	togglePin(GPIOC, 13);
 
-	testDraw();
+	//testDraw();
 	
-	//writePin(GPIOA, 4, 0);
 	while(1){
 	}
 }
@@ -46,6 +54,7 @@ static void initClock(){
 	
 	enableClockForTimer2();
 	enableClockForTimer3();
+	enableClockForTimer4();
 	
 	enableClockForAltFunc();
 	enableClockForPort(GPIOA);
@@ -121,6 +130,17 @@ static void initGPIOs(){
 	initGPIO(my_gpio);
 }
 
+
+void delayUs(uint32_t us){
+	tim4_tick = 0;
+	
+	TIM4->CR1 |= TIM_CR1_CEN;
+	
+	while (tim4_tick < us);
+	
+	TIM4->CR1 &= ~TIM_CR1_CEN;
+}
+
 void delayMs(uint32_t ms){
 	time = sys_tick;		
 	while ((sys_tick - time) < ms);
@@ -172,6 +192,16 @@ void TIM2_IRQHandler(void){
 	}
 	
 	TIM2->SR &= ~(TIM_SR_UIF);
+	
+}
+
+void TIM4_IRQHandler(void){
+	
+	if (TIM4->SR & TIM_SR_UIF){
+		tim4_tick++;
+	}
+	
+	TIM4->SR &= ~(TIM_SR_UIF);
 	
 }
 
@@ -387,5 +417,21 @@ static void testDraw(void){
 	liftPen(0);
 	drawCircle(30);
 	
+}
+
+void USART1_IRQHandler(void){
+	
+	//togglePin(GPIOC, 13);
+	
+	if (USART1->SR & USART_SR_RXNE){	//rx flag
+		c = (uint8_t)USART1->DR;
+		//USART1->DR = c + 1;
+		USART1->SR &= ~USART_SR_RXNE;
+	}
+	
+	else if (USART1->SR & USART_SR_TC){	//tx flag
+		//togglePin(GPIOC, 13);
+		USART1->SR &= ~USART_SR_TC;
+	}
 }
 

@@ -37,11 +37,13 @@
 static void initClock(void);
 static void initGPIOs(void);
 
+void delayUs(uint32_t us);
 void delayMs(uint32_t ms);
 
 static void startButton(void);
 
 void TIM2_IRQHandler(void);
+void TIM4_IRQHandler(void);
 
 void SysTick_Handler(void);
 uint32_t getSysTick(void);
@@ -56,5 +58,7 @@ static void drawCircle(float r);
 static void liftPen(uint8_t pen_up);
 
 static void testDraw(void);
+
+void USART1_IRQHandler(void);
 
 #endif

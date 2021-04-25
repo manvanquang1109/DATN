@@ -18,5 +18,6 @@ void enableClockForPort(GPIO_TypeDef *port);
 void enableClockForUART1(void);
 void enableClockForTimer2(void);
 void enableClockForTimer3(void);
+void enableClockForTimer4(void);
 
 #endif

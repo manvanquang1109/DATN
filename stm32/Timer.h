@@ -7,4 +7,6 @@ void initTimer2(void);
 
 void initTimer3(void);
 
+void initTimer4(void);
+
 #endif

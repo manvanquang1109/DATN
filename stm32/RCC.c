@@ -30,3 +30,6 @@ void enableClockForTimer3(void){
 	RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;
 }
 
+void enableClockForTimer4(void){
+	RCC->APB1ENR |= RCC_APB1ENR_TIM4EN;
+}

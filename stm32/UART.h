@@ -14,5 +14,6 @@
 
 void initUSART1(void);
 void printMsg(char *msg, ...);
+void transmitWhatReceived(void);
 
 #endif
