@@ -16,7 +16,9 @@ static volatile float step_y_i10 = 0;
 static volatile uint8_t x_only = 0;
 static volatile uint8_t y_only = 0;
 
-volatile uint8_t c = 'A';
+volatile uint8_t rx_char;
+volatile uint8_t rx_string[80];
+volatile uint16_t idx;
 
 static volatile uint32_t tim4_tick = 0;
 
@@ -37,10 +39,17 @@ int main(){
 	
 	//liftPen(1);
 	
-	printMsg("Chao %.2f ban nhe hihi\n", step_x);
+	sendString("AT\r\n");
 	
-	writePin(PORTC, 13, 0);
-	startButton();	
+	delayUs(1000);
+//	c = receiveChar();
+//	rx_string[5] = 44;
+	
+	sendString("hihi %d %d %d %d %d %d", rx_string[7], rx_string[8], rx_string[9], rx_string[10], rx_string[11], rx_string[12]);
+//	sendString("hihi %d", idx);
+	
+	//writePin(PORTC, 13, 0);
+	startButton();
 	togglePin(GPIOC, 13);
 
 	//testDraw();
@@ -419,19 +428,5 @@ static void testDraw(void){
 	
 }
 
-void USART1_IRQHandler(void){
-	
-	//togglePin(GPIOC, 13);
-	
-	if (USART1->SR & USART_SR_RXNE){	//rx flag
-		c = (uint8_t)USART1->DR;
-		//USART1->DR = c + 1;
-		USART1->SR &= ~USART_SR_RXNE;
-	}
-	
-	else if (USART1->SR & USART_SR_TC){	//tx flag
-		//togglePin(GPIOC, 13);
-		USART1->SR &= ~USART_SR_TC;
-	}
-}
+
 

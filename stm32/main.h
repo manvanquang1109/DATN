@@ -8,6 +8,7 @@
 #include "RCC.h"
 #include "UART.h"
 #include "Timer.h"
+#include "ESP8266.h"
 
 //define cac hang so
 #define DIS_PER_REV	(float)41.52

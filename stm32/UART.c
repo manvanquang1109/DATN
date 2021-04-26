@@ -1,9 +1,10 @@
 #include "UART.h"
 
-
 //baud rate = 115200 for 72MHz on APB1 bus
 //usart1 TC & RXNE interrupt
 void initUSART1(){
+	idx = 0;
+	
 	USART1->BRR = 0x0271;
 	USART1->CR1 |= USART_CR1_TE | USART_CR1_RE;	//transmitter & receiver enable
 	USART1->CR1	|= USART_CR1_UE;	//enable usart1
@@ -15,6 +16,32 @@ void initUSART1(){
 //	USART1->SR &= ~USART_SR_RXNE;
 //	USART1->SR &= ~USART_SR_TC;
 //	USART1->SR &= ~USART_SR_TXE;
+}
+
+void USART1_IRQHandler(void){
+	
+	//togglePin(GPIOC, 13);
+	
+	if (USART1->SR & USART_SR_RXNE){	//rx flag
+		rx_char = (uint8_t)USART1->DR;
+		//writePin(GPIOC, 13, 1);
+		
+//		rx_string[idx] = rx_char;
+//		idx++;
+		storeChar(rx_char, rx_string);
+		
+		USART1->SR &= ~USART_SR_RXNE;
+	}
+	
+	else if (USART1->SR & USART_SR_TC){	//tx flag
+		//togglePin(GPIOC, 13);
+		USART1->SR &= ~USART_SR_TC;
+	}
+}
+
+void storeChar(uint8_t c, volatile uint8_t *str){
+	str[idx] = c;
+	idx++;
 }
 
 void printMsg(char *msg, ...){
@@ -34,6 +61,35 @@ void printMsg(char *msg, ...){
 	}
 	
 	#endif
+}
+
+void sendString(char *str, ...){
+	
+	char buff[80];
+	
+	va_list args;
+	va_start(args, str);
+	vsprintf(buff, str, args);
+	
+	for (uint8_t i = 0; i < strlen(buff); i++){
+		volatile unsigned char temp = buff[i];
+		USART1->DR = temp;
+		delayUs(50);
+	}
+	
+	return;
+}
+
+uint8_t receiveChar(void){
+	uint8_t c = 'A';
+	
+	USART1->CR1	|= USART_CR1_UE;	//enable usart1
+	
+	c = (uint8_t)USART1->DR;
+	
+	USART1->CR1	&= ~USART_CR1_UE;	//disable usart1
+	
+	return c;
 }
 
 void transmitWhatReceived(void){
