@@ -66,6 +66,10 @@ void printMsg(char *msg, ...){
 void sendString(char *str, ...){
 	
 	char buff[80];
+	idx = 0;
+	for (volatile int i = 0; i < BUFF_LEN; i++){
+		rx_string[i] = 0;
+	}
 	
 	va_list args;
 	va_start(args, str);
@@ -101,4 +105,14 @@ void transmitWhatReceived(void){
 			while ( !(USART1->SR & USART_SR_TC) );
 		}
 	}
+}
+
+uint8_t waitFor(uint8_t *str){
+	uint8_t* ret = strstr(rx_string, str);
+	
+	if (ret){
+		return 1;
+	}
+	
+	return 0;
 }

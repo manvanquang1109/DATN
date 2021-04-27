@@ -17,8 +17,10 @@ static volatile uint8_t x_only = 0;
 static volatile uint8_t y_only = 0;
 
 volatile uint8_t rx_char;
-volatile uint8_t rx_string[80];
+volatile uint8_t rx_string[BUFF_LEN];
 volatile uint16_t idx;
+
+volatile uint8_t wifi_info[BUFF_LEN];
 
 static volatile uint32_t tim4_tick = 0;
 
@@ -39,14 +41,35 @@ int main(){
 	
 	//liftPen(1);
 	
+	
+	/********* AT **********/
 	sendString("AT\r\n");
-	
 	delayUs(1000);
-//	c = receiveChar();
-//	rx_string[5] = 44;
 	
-	sendString("hihi %d %d %d %d %d %d", rx_string[7], rx_string[8], rx_string[9], rx_string[10], rx_string[11], rx_string[12]);
-//	sendString("hihi %d", idx);
+	while (!waitFor("OK\r\n"));
+	
+	
+	/********* AT+CWMODE=1 **********/
+	sendString("AT+CWMODE=1\r\n");
+	delayUs(1000);
+	
+	while (!waitFor("OK\r\n"));
+	
+	
+	/********* AT+CWJAP="SSID","PASSWD" **********/
+	sprintf(wifi_info, "AT+CWJAP=\"%s\",\"%s\"\r\n", WIFI_SSID, WIFI_PASS);
+	sendString(wifi_info);
+	
+	while (!waitFor("OK\r\n"));
+	
+	
+	/********* AT+CIFSR **********/
+	sendString("AT+CIFSR\r\n");
+
+	sendString("idx = %d, ", idx);
+	//sendString("hihi %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", rx_string[7], rx_string[8], rx_string[9], rx_string[10], rx_string[11], rx_string[12], rx_string[13], rx_string[14], rx_string[15], rx_string[16], rx_string[17], rx_string[18], rx_string[19], rx_string[20], rx_string[21], rx_string[22]);
+//	sendString("hihi %c %c %c %c %c %c", rx_string[7], rx_string[8], rx_string[9], rx_string[10], rx_string[11], rx_string[12]);	
+
 	
 	//writePin(PORTC, 13, 0);
 	startButton();
