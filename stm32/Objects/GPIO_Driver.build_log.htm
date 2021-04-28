@@ -21,16 +21,70 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.7.0
 Dialog DLL:      TCM.DLL V1.46.0.0
  
 <h2>Project:</h2>
-C:\STM32\test_from_scratch\GPIO_Driver.uvprojx
-Project File Date:  04/24/2021
+C:\Users\manva\Desktop\git\DATN\stm32\GPIO_Driver.uvprojx
+Project File Date:  04/26/2021
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.14', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
-compiling main.c...
+UART.c(51): warning: format string is not a string literal [-Wformat-nonliteral]
+        vsprintf(buff, str, args);
+                       ^~~
+UART.c(74): warning: function 'transmitWhatReceived' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
+void transmitWhatReceived(void){
+                               ^
+UART.c(86): warning: passing 'volatile uint8_t [240]' to parameter of type 'const char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+        uint8_t* ret = strstr(rx_string, str);
+                              ^~~~~~~~~
+C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h(270): note: passing argument to parameter here
+extern _ARMABI char *strstr(const char * /*s1*/, const char * /*s2*/) __attribute__((__nonnull__(1,2)));
+                                               ^
+UART.c(86): warning: passing 'uint8_t *' (aka 'unsigned char *') to parameter of type 'const char *' converts between pointers to integer types with different sign [-Wpointer-sign]
+        uint8_t* ret = strstr(rx_string, str);
+                                         ^~~
+C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h(270): note: passing argument to parameter here
+extern _ARMABI char *strstr(const char * /*s1*/, const char * /*s2*/) __attribute__((__nonnull__(1,2)));
+                                                                    ^
+UART.c(86): warning: initializing 'uint8_t *' (aka 'unsigned char *') with an expression of type 'char *' converts between pointers to integer types with different sign [-Wpointer-sign]
+        uint8_t* ret = strstr(rx_string, str);
+                 ^     ~~~~~~~~~~~~~~~~~~~~~~
+UART.c(131): warning: format string is not a string literal [-Wformat-nonliteral]
+        vsprintf(buff, str, args);
+                       ^~~
+UART.c(1): warning: In file included from...
+./UART.h(14): warning: In file included from...
+./main.h(38): warning: unused function 'initClock' [-Wunused-function]
+static void initClock(void);
+            ^
+./main.h(39): warning: unused function 'initGPIOs' [-Wunused-function]
+static void initGPIOs(void);
+            ^
+./main.h(44): warning: unused function 'startButton' [-Wunused-function]
+static void startButton(void);
+            ^
+./main.h(52): warning: unused function 'moveX' [-Wunused-function]
+static void moveX(float dx);
+            ^
+./main.h(53): warning: unused function 'moveY' [-Wunused-function]
+static void moveY(float dy);
+            ^
+./main.h(55): warning: unused function 'moveXY' [-Wunused-function]
+static void moveXY(float dx, float dy);
+            ^
+./main.h(57): warning: unused function 'drawCircle' [-Wunused-function]
+static void drawCircle(float r);
+            ^
+./main.h(59): warning: unused function 'liftPen' [-Wunused-function]
+static void liftPen(uint8_t pen_up);
+            ^
+./main.h(61): warning: unused function 'testDraw' [-Wunused-function]
+static void testDraw(void);
+            ^
+15 warnings generated.
+compiling UART.c...
 linking...
-Program Size: Code=10524 RO-data=692 RW-data=4 ZI-data=1688  
-".\Objects\GPIO_Driver.axf" - 0 Error(s), 0 Warning(s).
+Program Size: Code=10602 RO-data=958 RW-data=4 ZI-data=2160  
+".\Objects\GPIO_Driver.axf" - 0 Error(s), 15 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -57,11 +111,11 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.4.0
 
    * Component: Keil::Device:Startup:1.0.0
-      Source file:   Device\Source\ARM\startup_stm32f10x_md.s
-      Include file:  RTE_Driver\Config\RTE_Device.h
-      Source file:   Device\Source\ARM\STM32F1xx_OPT.s
       Source file:   Device\Source\system_stm32f10x.c
-Build Time Elapsed:  00:00:01
+      Include file:  RTE_Driver\Config\RTE_Device.h
+      Source file:   Device\Source\ARM\startup_stm32f10x_md.s
+      Source file:   Device\Source\ARM\STM32F1xx_OPT.s
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>

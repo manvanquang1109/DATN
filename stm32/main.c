@@ -16,27 +16,40 @@ static volatile float step_y_i10 = 0;
 static volatile uint8_t x_only = 0;
 static volatile uint8_t y_only = 0;
 
+volatile uint8_t rx_char;
+volatile uint8_t rx_string[BUFF_LEN];
+volatile uint16_t idx;
+
+volatile uint8_t wifi_info[BUFF_LEN];
+
+volatile uint8_t usart3_char;
+
+static volatile uint32_t tim4_tick = 0;
+
 int main(){
 	SysTick_Config(SystemCoreClock / 1000);	
 	initClock();
 	initGPIOs();
 	
 	initUSART1();
-//	printMsg("Chao %.2lf ban\n", step_x);
+	initUSART3();
 	
-	initTimer2();
+	//initTimer2();
 	
-	initTimer3();
+	//initTimer3();
 	
-	liftPen(1);
+	//timer for delayUs function
+	initTimer4();
 	
-	writePin(PORTC, 13, 0);	
-	startButton();	
+	initESP();
+	//liftPen(1);
+	
+	writePin(PORTC, 13, 0);
+	startButton();
 	togglePin(GPIOC, 13);
 
-	testDraw();
+	//testDraw();
 	
-	//writePin(GPIOA, 4, 0);
 	while(1){
 	}
 }
@@ -46,10 +59,14 @@ static void initClock(){
 	
 	enableClockForTimer2();
 	enableClockForTimer3();
+	enableClockForTimer4();
 	
 	enableClockForAltFunc();
-	enableClockForPort(GPIOA);
-	enableClockForUART1();
+	enableClockForPort(GPIOA);	
+	enableClockForUSART1();
+	
+	enableClockForPort(GPIOB);
+	enableClockForUSART3();
 }
 
 static void initGPIOs(){
@@ -104,6 +121,14 @@ static void initGPIOs(){
 	
 	initGPIO(my_gpio);	
 	
+	//servo PWM PA7
+	my_gpio.port = SERVO_PORT;
+	my_gpio.pin = SERVO_PIN;
+	my_gpio.mode = OUTPUT_MODE_SPEED_10MHZ;
+	my_gpio.cnf = OUTPUT_AF_PP;
+	
+	initGPIO(my_gpio);
+	
 	//uart1 PA9 Tx
 	my_gpio.port = GPIOA;
 	my_gpio.pin = 9;
@@ -112,13 +137,40 @@ static void initGPIOs(){
 	
 	initGPIO(my_gpio);
 	
-	//servo PWM PA7
-	my_gpio.port = SERVO_PORT;
-	my_gpio.pin = SERVO_PIN;
+	//uart1 PA10 Rx
+	my_gpio.port = GPIOA;
+	my_gpio.pin = 10;
+	my_gpio.mode = INPUT_MODE;
+	my_gpio.cnf = INPUT_FLOATING;
+	
+	initGPIO(my_gpio);
+	
+	//uart3 PB10 Tx
+	my_gpio.port = GPIOB;
+	my_gpio.pin = 10;
 	my_gpio.mode = OUTPUT_MODE_SPEED_10MHZ;
 	my_gpio.cnf = OUTPUT_AF_PP;
 	
 	initGPIO(my_gpio);
+	
+	//uart3 PB11 Rx
+	my_gpio.port = GPIOB;
+	my_gpio.pin = 11;
+	my_gpio.mode = INPUT_MODE;
+	my_gpio.cnf = INPUT_FLOATING;
+	
+	initGPIO(my_gpio);
+}
+
+
+void delayUs(uint32_t us){
+	tim4_tick = 0;
+	
+	TIM4->CR1 |= TIM_CR1_CEN;
+	
+	while (tim4_tick < us);
+	
+	TIM4->CR1 &= ~TIM_CR1_CEN;
 }
 
 void delayMs(uint32_t ms){
@@ -172,6 +224,16 @@ void TIM2_IRQHandler(void){
 	}
 	
 	TIM2->SR &= ~(TIM_SR_UIF);
+	
+}
+
+void TIM4_IRQHandler(void){
+	
+	if (TIM4->SR & TIM_SR_UIF){
+		tim4_tick++;
+	}
+	
+	TIM4->SR &= ~(TIM_SR_UIF);
 	
 }
 
@@ -388,4 +450,6 @@ static void testDraw(void){
 	drawCircle(30);
 	
 }
+
+
 

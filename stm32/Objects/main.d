@@ -13,4 +13,4 @@
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdlib.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdarg.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h Timer.h
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h Timer.h ESP8266.h

@@ -18,8 +18,12 @@ void enableClockForPort(GPIO_TypeDef *port){
 		GPIO_CLOCK_ENABLE_PORTD;
 }
 
-void enableClockForUART1(void){
-	CLOCK_ENABLE_UART1;
+void enableClockForUSART1(void){
+	CLOCK_ENABLE_USART1;
+}
+
+void enableClockForUSART3(void){
+	CLOCK_ENABLE_USART3;
 }
 
 void enableClockForTimer2(void){
@@ -30,3 +34,6 @@ void enableClockForTimer3(void){
 	RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;
 }
 
+void enableClockForTimer4(void){
+	RCC->APB1ENR |= RCC_APB1ENR_TIM4EN;
+}
