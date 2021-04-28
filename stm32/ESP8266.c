@@ -1,4 +1,5 @@
 #include "ESP8266.h"
+volatile uint8_t tx_string[BUFF_LEN];
 
 void initESP(void){
 	/********* AT **********/
@@ -15,8 +16,8 @@ void initESP(void){
 	
 	
 	/********* AT+CWJAP="SSID","PASSWD" **********/
-	sprintf(wifi_info, "AT+CWJAP=\"%s\",\"%s\"\r\n", WIFI_SSID, WIFI_PASS);
-	sendString(wifi_info);
+	sprintf(tx_string, "AT+CWJAP=\"%s\",\"%s\"\r\n", WIFI_SSID, WIFI_PASS);
+	sendString(tx_string);
 	
 	while (!waitFor("OK\r\n"));
 	sendStringToPC("hihi");

@@ -1,6 +1,6 @@
 Dependencies for Project 'GPIO_Driver', Target 'Target 1': (DO NOT MODIFY !)
 CompilerVersion: 6140000::V6.14::ARMCLANG
-F (.\main.c)(0x608920B2)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-3 -O1 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Keil_v5/ARM/PACK/ARM/CMSIS/5.7.0/CMSIS/Core/Include-IC:/Keil_v5/ARM/PACK/Keil/STM32F1xx_DFP/2.3.0/Device/Include-D__UVISION_VERSION="531" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/main.o -MD)
+F (.\main.c)(0x60892388)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-3 -O1 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Keil_v5/ARM/PACK/ARM/CMSIS/5.7.0/CMSIS/Core/Include-IC:/Keil_v5/ARM/PACK/Keil/STM32F1xx_DFP/2.3.0/Device/Include-D__UVISION_VERSION="531" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/main.o -MD)
 I (main.h)(0x6086B986)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h)(0x5825467C)
 I (RTE\_Target_1\RTE_Components.h)(0x60710E13)
@@ -15,7 +15,7 @@ I (C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include\system_stm32f10x.
 I (C:\Keil_v5\ARM\ARMCLANG\include\math.h)(0x5ED619F4)
 I (_HAL_GPIO.h)(0x6078FD99)
 I (RCC.h)(0x608920B2)
-I (UART.h)(0x60892046)
+I (UART.h)(0x60892317)
 I (C:\Keil_v5\ARM\ARMCLANG\include\string.h)(0x5ED619F4)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdlib.h)(0x5ED619F4)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdarg.h)(0x5ED619F4)
@@ -36,9 +36,9 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armclang.h)(0x5E
 I (C:\Keil_v5\ARM\ARMCLANG\include\arm_compat.h)(0x5E0CD0FC)
 I (C:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h)(0x5E0CD128)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include\system_stm32f10x.h)(0x5825467C)
-F (.\UART.h)(0x60892046)()
+F (.\UART.h)(0x60892317)()
 F (.\UART.c)(0x608921B8)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-3 -O1 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Keil_v5/ARM/PACK/ARM/CMSIS/5.7.0/CMSIS/Core/Include-IC:/Keil_v5/ARM/PACK/Keil/STM32F1xx_DFP/2.3.0/Device/Include-D__UVISION_VERSION="531" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/uart.o -MD)
-I (UART.h)(0x60892046)
+I (UART.h)(0x60892317)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h)(0x5825467C)
 I (RTE\_Target_1\RTE_Components.h)(0x60710E13)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm3.h)(0x5E8EDF32)
@@ -85,7 +85,7 @@ I (C:\Keil_v5\ARM\ARMCLANG\include\arm_compat.h)(0x5E0CD0FC)
 I (C:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h)(0x5E0CD128)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include\system_stm32f10x.h)(0x5825467C)
 F (.\Timer.h)(0x60853A44)()
-F (.\ESP8266.c)(0x6089215C)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-3 -O1 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Keil_v5/ARM/PACK/ARM/CMSIS/5.7.0/CMSIS/Core/Include-IC:/Keil_v5/ARM/PACK/Keil/STM32F1xx_DFP/2.3.0/Device/Include-D__UVISION_VERSION="531" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/esp8266.o -MD)
+F (.\ESP8266.c)(0x608923AE)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-3 -O1 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/Device/STM32F103C8-I./RTE/_Target_1-IC:/Keil_v5/ARM/PACK/ARM/CMSIS/5.7.0/CMSIS/Core/Include-IC:/Keil_v5/ARM/PACK/Keil/STM32F1xx_DFP/2.3.0/Device/Include-D__UVISION_VERSION="531" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o ./objects/esp8266.o -MD)
 I (ESP8266.h)(0x60891E0E)
 I (C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h)(0x5825467C)
 I (RTE\_Target_1\RTE_Components.h)(0x60710E13)
@@ -101,7 +101,7 @@ I (main.h)(0x6086B986)
 I (C:\Keil_v5\ARM\ARMCLANG\include\math.h)(0x5ED619F4)
 I (_HAL_GPIO.h)(0x6078FD99)
 I (RCC.h)(0x608920B2)
-I (UART.h)(0x60892046)
+I (UART.h)(0x60892317)
 I (C:\Keil_v5\ARM\ARMCLANG\include\string.h)(0x5ED619F4)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdlib.h)(0x5ED619F4)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdarg.h)(0x5ED619F4)

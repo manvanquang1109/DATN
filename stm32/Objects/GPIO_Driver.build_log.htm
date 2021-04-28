@@ -27,32 +27,41 @@ Project File Date:  04/26/2021
 <h2>Output:</h2>
 *** Using Compiler 'V6.14', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
-UART.c(51): warning: format string is not a string literal [-Wformat-nonliteral]
-        vsprintf(buff, str, args);
-                       ^~~
-UART.c(74): warning: function 'transmitWhatReceived' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
-void transmitWhatReceived(void){
-                               ^
-UART.c(86): warning: passing 'volatile uint8_t [240]' to parameter of type 'const char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
-        uint8_t* ret = strstr(rx_string, str);
-                              ^~~~~~~~~
-C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h(270): note: passing argument to parameter here
-extern _ARMABI char *strstr(const char * /*s1*/, const char * /*s2*/) __attribute__((__nonnull__(1,2)));
-                                               ^
-UART.c(86): warning: passing 'uint8_t *' (aka 'unsigned char *') to parameter of type 'const char *' converts between pointers to integer types with different sign [-Wpointer-sign]
-        uint8_t* ret = strstr(rx_string, str);
-                                         ^~~
-C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h(270): note: passing argument to parameter here
-extern _ARMABI char *strstr(const char * /*s1*/, const char * /*s2*/) __attribute__((__nonnull__(1,2)));
-                                                                    ^
-UART.c(86): warning: initializing 'uint8_t *' (aka 'unsigned char *') with an expression of type 'char *' converts between pointers to integer types with different sign [-Wpointer-sign]
-        uint8_t* ret = strstr(rx_string, str);
-                 ^     ~~~~~~~~~~~~~~~~~~~~~~
-UART.c(131): warning: format string is not a string literal [-Wformat-nonliteral]
-        vsprintf(buff, str, args);
-                       ^~~
-UART.c(1): warning: In file included from...
-./UART.h(14): warning: In file included from...
+ESP8266.c(9): warning: passing 'char [5]' to parameter of type 'uint8_t *' (aka 'unsigned char *') converts between pointers to integer types with different sign [-Wpointer-sign]
+        while (!waitFor("OK\r\n"));
+                        ^~~~~~~~
+./UART.h(37): note: passing argument to parameter 'str' here
+uint8_t waitFor(uint8_t *str);
+                         ^
+ESP8266.c(15): warning: passing 'char [5]' to parameter of type 'uint8_t *' (aka 'unsigned char *') converts between pointers to integer types with different sign [-Wpointer-sign]
+        while (!waitFor("OK\r\n"));
+                        ^~~~~~~~
+./UART.h(37): note: passing argument to parameter 'str' here
+uint8_t waitFor(uint8_t *str);
+                         ^
+ESP8266.c(19): warning: passing 'volatile uint8_t [240]' to parameter of type 'char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+        sprintf(tx_string, "AT+CWJAP=\"%s\",\"%s\"\r\n", WIFI_SSID, WIFI_PASS);
+                ^~~~~~~~~
+C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h(417): note: passing argument to parameter here
+extern _ARMABI int sprintf(char * __restrict /*s*/, const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1,2)));
+                                                  ^
+ESP8266.c(20): warning: passing 'volatile uint8_t [240]' to parameter of type 'char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+        sendString(tx_string);
+                   ^~~~~~~~~
+./UART.h(33): note: passing argument to parameter 'str' here
+void sendString(char *str, ...);
+                      ^
+ESP8266.c(22): warning: passing 'char [5]' to parameter of type 'uint8_t *' (aka 'unsigned char *') converts between pointers to integer types with different sign [-Wpointer-sign]
+        while (!waitFor("OK\r\n"));
+                        ^~~~~~~~
+./UART.h(37): note: passing argument to parameter 'str' here
+uint8_t waitFor(uint8_t *str);
+                         ^
+ESP8266.c(29): warning: no newline at end of file [-Wnewline-eof]
+}
+ ^
+ESP8266.c(1): warning: In file included from...
+./ESP8266.h(5): warning: In file included from...
 ./main.h(38): warning: unused function 'initClock' [-Wunused-function]
 static void initClock(void);
             ^
@@ -81,7 +90,7 @@ static void liftPen(uint8_t pen_up);
 static void testDraw(void);
             ^
 15 warnings generated.
-compiling UART.c...
+compiling ESP8266.c...
 linking...
 Program Size: Code=10602 RO-data=958 RW-data=4 ZI-data=2160  
 ".\Objects\GPIO_Driver.axf" - 0 Error(s), 15 Warning(s).
@@ -115,7 +124,7 @@ Package Vendor: Keil
       Include file:  RTE_Driver\Config\RTE_Device.h
       Source file:   Device\Source\ARM\startup_stm32f10x_md.s
       Source file:   Device\Source\ARM\STM32F1xx_OPT.s
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

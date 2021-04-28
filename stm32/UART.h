@@ -20,7 +20,7 @@ extern volatile uint8_t rx_char;
 extern volatile uint8_t rx_string[BUFF_LEN];
 extern volatile uint16_t idx;
 
-extern volatile uint8_t wifi_info[BUFF_LEN];
+extern volatile uint8_t tx_string[BUFF_LEN];
 
 extern volatile uint8_t usart3_char;
 

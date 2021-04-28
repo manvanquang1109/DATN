@@ -20,8 +20,6 @@ volatile uint8_t rx_char;
 volatile uint8_t rx_string[BUFF_LEN];
 volatile uint16_t idx;
 
-volatile uint8_t wifi_info[BUFF_LEN];
-
 volatile uint8_t usart3_char;
 
 static volatile uint32_t tim4_tick = 0;
