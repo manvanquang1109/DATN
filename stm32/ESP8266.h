@@ -5,6 +5,9 @@
 #include "main.h"
 #include "UART.h"
 
+#define WIFI_SSID	"MVMinh"
+#define	WIFI_PASS	"15061980"
+
 void initESP(void);
 
 #endif

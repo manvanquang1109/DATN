@@ -22,6 +22,8 @@ volatile uint16_t idx;
 
 volatile uint8_t wifi_info[BUFF_LEN];
 
+volatile uint8_t usart3_char;
+
 static volatile uint32_t tim4_tick = 0;
 
 int main(){
@@ -30,7 +32,7 @@ int main(){
 	initGPIOs();
 	
 	initUSART1();
-	//transmitWhatReceived();
+	initUSART3();
 	
 	//initTimer2();
 	
@@ -39,39 +41,10 @@ int main(){
 	//timer for delayUs function
 	initTimer4();
 	
+	initESP();
 	//liftPen(1);
 	
-	
-	/********* AT **********/
-	sendString("AT\r\n");
-	delayUs(1000);
-	
-	while (!waitFor("OK\r\n"));
-	
-	
-	/********* AT+CWMODE=1 **********/
-	sendString("AT+CWMODE=1\r\n");
-	delayUs(1000);
-	
-	while (!waitFor("OK\r\n"));
-	
-	
-	/********* AT+CWJAP="SSID","PASSWD" **********/
-	sprintf(wifi_info, "AT+CWJAP=\"%s\",\"%s\"\r\n", WIFI_SSID, WIFI_PASS);
-	sendString(wifi_info);
-	
-	while (!waitFor("OK\r\n"));
-	
-	
-	/********* AT+CIFSR **********/
-	sendString("AT+CIFSR\r\n");
-
-	sendString("idx = %d, ", idx);
-	//sendString("hihi %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", rx_string[7], rx_string[8], rx_string[9], rx_string[10], rx_string[11], rx_string[12], rx_string[13], rx_string[14], rx_string[15], rx_string[16], rx_string[17], rx_string[18], rx_string[19], rx_string[20], rx_string[21], rx_string[22]);
-//	sendString("hihi %c %c %c %c %c %c", rx_string[7], rx_string[8], rx_string[9], rx_string[10], rx_string[11], rx_string[12]);	
-
-	
-	//writePin(PORTC, 13, 0);
+	writePin(PORTC, 13, 0);
 	startButton();
 	togglePin(GPIOC, 13);
 
@@ -89,8 +62,11 @@ static void initClock(){
 	enableClockForTimer4();
 	
 	enableClockForAltFunc();
-	enableClockForPort(GPIOA);
-	enableClockForUART1();
+	enableClockForPort(GPIOA);	
+	enableClockForUSART1();
+	
+	enableClockForPort(GPIOB);
+	enableClockForUSART3();
 }
 
 static void initGPIOs(){
@@ -145,6 +121,14 @@ static void initGPIOs(){
 	
 	initGPIO(my_gpio);	
 	
+	//servo PWM PA7
+	my_gpio.port = SERVO_PORT;
+	my_gpio.pin = SERVO_PIN;
+	my_gpio.mode = OUTPUT_MODE_SPEED_10MHZ;
+	my_gpio.cnf = OUTPUT_AF_PP;
+	
+	initGPIO(my_gpio);
+	
 	//uart1 PA9 Tx
 	my_gpio.port = GPIOA;
 	my_gpio.pin = 9;
@@ -153,11 +137,27 @@ static void initGPIOs(){
 	
 	initGPIO(my_gpio);
 	
-	//servo PWM PA7
-	my_gpio.port = SERVO_PORT;
-	my_gpio.pin = SERVO_PIN;
+	//uart1 PA10 Rx
+	my_gpio.port = GPIOA;
+	my_gpio.pin = 10;
+	my_gpio.mode = INPUT_MODE;
+	my_gpio.cnf = INPUT_FLOATING;
+	
+	initGPIO(my_gpio);
+	
+	//uart3 PB10 Tx
+	my_gpio.port = GPIOB;
+	my_gpio.pin = 10;
 	my_gpio.mode = OUTPUT_MODE_SPEED_10MHZ;
 	my_gpio.cnf = OUTPUT_AF_PP;
+	
+	initGPIO(my_gpio);
+	
+	//uart3 PB11 Rx
+	my_gpio.port = GPIOB;
+	my_gpio.pin = 11;
+	my_gpio.mode = INPUT_MODE;
+	my_gpio.cnf = INPUT_FLOATING;
 	
 	initGPIO(my_gpio);
 }
