@@ -22,37 +22,97 @@ Dialog DLL:      TCM.DLL V1.46.0.0
  
 <h2>Project:</h2>
 C:\Users\manva\Desktop\git\DATN\stm32\GPIO_Driver.uvprojx
-Project File Date:  04/26/2021
+Project File Date:  05/04/2021
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.14', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
-UART.c(51): warning: format string is not a string literal [-Wformat-nonliteral]
-        vsprintf(buff, str, args);
-                       ^~~
-UART.c(74): warning: function 'transmitWhatReceived' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
-void transmitWhatReceived(void){
-                               ^
-UART.c(86): warning: passing 'volatile uint8_t [240]' to parameter of type 'const char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
-        uint8_t* ret = strstr(rx_string, str);
-                              ^~~~~~~~~
-C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h(270): note: passing argument to parameter here
-extern _ARMABI char *strstr(const char * /*s1*/, const char * /*s2*/) __attribute__((__nonnull__(1,2)));
-                                               ^
-UART.c(86): warning: passing 'uint8_t *' (aka 'unsigned char *') to parameter of type 'const char *' converts between pointers to integer types with different sign [-Wpointer-sign]
-        uint8_t* ret = strstr(rx_string, str);
-                                         ^~~
-C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h(270): note: passing argument to parameter here
-extern _ARMABI char *strstr(const char * /*s1*/, const char * /*s2*/) __attribute__((__nonnull__(1,2)));
-                                                                    ^
-UART.c(86): warning: initializing 'uint8_t *' (aka 'unsigned char *') with an expression of type 'char *' converts between pointers to integer types with different sign [-Wpointer-sign]
-        uint8_t* ret = strstr(rx_string, str);
-                 ^     ~~~~~~~~~~~~~~~~~~~~~~
-UART.c(131): warning: format string is not a string literal [-Wformat-nonliteral]
-        vsprintf(buff, str, args);
-                       ^~~
-UART.c(1): warning: In file included from...
-./UART.h(14): warning: In file included from...
+ESP8266.c(11): warning: passing 'char [5]' to parameter of type 'uint8_t *' (aka 'unsigned char *') converts between pointers to integer types with different sign [-Wpointer-sign]
+        while (!waitFor("OK\r\n"));
+                        ^~~~~~~~
+./UART.h(37): note: passing argument to parameter 'str' here
+uint8_t waitFor(uint8_t *str);
+                         ^
+ESP8266.c(17): warning: passing 'char [5]' to parameter of type 'uint8_t *' (aka 'unsigned char *') converts between pointers to integer types with different sign [-Wpointer-sign]
+        while (!waitFor("OK\r\n"));
+                        ^~~~~~~~
+./UART.h(37): note: passing argument to parameter 'str' here
+uint8_t waitFor(uint8_t *str);
+                         ^
+ESP8266.c(21): warning: passing 'volatile uint8_t [240]' to parameter of type 'char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+        sprintf(tx_string, "AT+CWJAP=\"%s\",\"%s\"\r\n", WIFI_SSID, WIFI_PASS);
+                ^~~~~~~~~
+C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h(417): note: passing argument to parameter here
+extern _ARMABI int sprintf(char * __restrict /*s*/, const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1,2)));
+                                                  ^
+ESP8266.c(22): warning: passing 'volatile uint8_t [240]' to parameter of type 'char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+        sendString(tx_string);
+                   ^~~~~~~~~
+./UART.h(33): note: passing argument to parameter 'str' here
+void sendString(char *str, ...);
+                      ^
+ESP8266.c(24): warning: passing 'char [5]' to parameter of type 'uint8_t *' (aka 'unsigned char *') converts between pointers to integer types with different sign [-Wpointer-sign]
+        while (!waitFor("OK\r\n"));
+                        ^~~~~~~~
+./UART.h(37): note: passing argument to parameter 'str' here
+uint8_t waitFor(uint8_t *str);
+                         ^
+ESP8266.c(32): warning: passing 'volatile uint8_t [240]' to parameter of type 'char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+        sprintf(tx_string, "AT+CIPSTART=\"TCP\",\"%s\",80\r\n", URL);
+                ^~~~~~~~~
+C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h(417): note: passing argument to parameter here
+extern _ARMABI int sprintf(char * __restrict /*s*/, const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1,2)));
+                                                  ^
+ESP8266.c(33): warning: passing 'volatile uint8_t [240]' to parameter of type 'char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+        sendString(tx_string);
+                   ^~~~~~~~~
+./UART.h(33): note: passing argument to parameter 'str' here
+void sendString(char *str, ...);
+                      ^
+ESP8266.c(34): warning: passing 'char [5]' to parameter of type 'uint8_t *' (aka 'unsigned char *') converts between pointers to integer types with different sign [-Wpointer-sign]
+        while (!waitFor("OK\r\n"));
+                        ^~~~~~~~
+./UART.h(37): note: passing argument to parameter 'str' here
+uint8_t waitFor(uint8_t *str);
+                         ^
+ESP8266.c(40): warning: passing 'volatile uint8_t [240]' to parameter of type 'char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+        sprintf(tx_string, "AT+CIPSEND=%d\r\n", lenGET + 4);
+                ^~~~~~~~~
+C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h(417): note: passing argument to parameter here
+extern _ARMABI int sprintf(char * __restrict /*s*/, const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1,2)));
+                                                  ^
+ESP8266.c(41): warning: passing 'volatile uint8_t [240]' to parameter of type 'char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+        sendString(tx_string);
+                   ^~~~~~~~~
+./UART.h(33): note: passing argument to parameter 'str' here
+void sendString(char *str, ...);
+                      ^
+ESP8266.c(42): warning: passing 'char [2]' to parameter of type 'uint8_t *' (aka 'unsigned char *') converts between pointers to integer types with different sign [-Wpointer-sign]
+        while   (!waitFor(">"));
+                          ^~~
+./UART.h(37): note: passing argument to parameter 'str' here
+uint8_t waitFor(uint8_t *str);
+                         ^
+ESP8266.c(48): warning: passing 'volatile uint8_t [240]' to parameter of type 'char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+        sprintf(tx_string, "%s\r\n\r\n", GET_REQ);
+                ^~~~~~~~~
+C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h(417): note: passing argument to parameter here
+extern _ARMABI int sprintf(char * __restrict /*s*/, const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1,2)));
+                                                  ^
+ESP8266.c(49): warning: passing 'volatile uint8_t [240]' to parameter of type 'char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+        sendString(tx_string);
+                   ^~~~~~~~~
+./UART.h(33): note: passing argument to parameter 'str' here
+void sendString(char *str, ...);
+                      ^
+ESP8266.c(50): warning: passing 'char [8]' to parameter of type 'uint8_t *' (aka 'unsigned char *') converts between pointers to integer types with different sign [-Wpointer-sign]
+        while   (!waitFor("</html>"));
+                          ^~~~~~~~~
+./UART.h(37): note: passing argument to parameter 'str' here
+uint8_t waitFor(uint8_t *str);
+                         ^
+ESP8266.c(1): warning: In file included from...
+./ESP8266.h(5): warning: In file included from...
 ./main.h(38): warning: unused function 'initClock' [-Wunused-function]
 static void initClock(void);
             ^
@@ -80,11 +140,11 @@ static void liftPen(uint8_t pen_up);
 ./main.h(61): warning: unused function 'testDraw' [-Wunused-function]
 static void testDraw(void);
             ^
-15 warnings generated.
-compiling UART.c...
+23 warnings generated.
+compiling ESP8266.c...
 linking...
-Program Size: Code=10602 RO-data=958 RW-data=4 ZI-data=2160  
-".\Objects\GPIO_Driver.axf" - 0 Error(s), 15 Warning(s).
+Program Size: Code=10842 RO-data=1066 RW-data=4 ZI-data=2160  
+".\Objects\GPIO_Driver.axf" - 0 Error(s), 23 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -111,11 +171,11 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.4.0
 
    * Component: Keil::Device:Startup:1.0.0
+      Source file:   Device\Source\ARM\startup_stm32f10x_md.s
       Source file:   Device\Source\system_stm32f10x.c
       Include file:  RTE_Driver\Config\RTE_Device.h
-      Source file:   Device\Source\ARM\startup_stm32f10x_md.s
       Source file:   Device\Source\ARM\STM32F1xx_OPT.s
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>
